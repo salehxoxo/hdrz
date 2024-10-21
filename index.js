@@ -90,21 +90,8 @@ const getId = async (q, year, type) => {
 // Define routes
 
 // GET /id/:query/:year/:type
-// app.get('/id/:query/:year/:type', async (req, res) => {
-//   const { query, year, type } = req.params;
-//   try {
-//     const id = await getId(query, year, type);
-//     res.json({ id });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// });
-
 app.get('/id/:query/:year/:type', async (req, res) => {
-  const query = decodeURIComponent(req.params.query);
-  const year = req.params.year;
-  const type = decodeURIComponent(req.params.type);
-
+  const { query, year, type } = req.params;
   try {
     const id = await getId(query, year, type);
     res.json({ id });
@@ -112,6 +99,7 @@ app.get('/id/:query/:year/:type', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 
 // GET /stream/:id/:type/:season?/:episode?
